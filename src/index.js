@@ -19,4 +19,4 @@ app.use('/files', express.static(`./src/controllers/uploads`));
 require('./controllers/authController')(app);
 require('./controllers/coinsController')(app);
 
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
