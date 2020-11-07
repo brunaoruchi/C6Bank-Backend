@@ -17,9 +17,22 @@ function generateToken(params = {}) {
 
 //Cadastro
 router.post('/register', async (req, res) => {
-    const {email} = req.body;
+    const {email, name, password, role} = req.body;
+    const regex_validation = /^.+@.+..+$/;
 
     try {
+        if(name == null || name.length <= 3)
+            return res.status(400).send({error: 'Invalid name'})
+
+        if(password == null || password.length <= 3)
+            return res.status(400).send({error: 'Invalid password'})
+
+        if(!(role == 'admin' || role == 'user'))
+            return res.status(400).send({error: 'Invalid role'})
+
+        if(!regex_validation.test(email))
+            return res.status(400).send({error: 'Invalid email'})
+
         if(await User.findOne({email}))
             return res.status(400).send({error: 'User already exists'})
 
@@ -38,7 +51,14 @@ router.post('/register', async (req, res) => {
 //Realiza o Login
 router.post('/authenticate', async (req, res) => {
     const  {email, password} = req.body;
+    const regex_validation = /^.+@.+..+$/;
 
+    if(password == null || password.length <= 3)
+        return res.status(400).send({error: 'Invalid password'})
+
+    if(!regex_validation.test(email))
+        return res.status(400).send({error: 'Invalid email'})
+        
     const user = await User.findOne({email}).select('+password');
 
     if (!user)

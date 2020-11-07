@@ -21,6 +21,9 @@ router.use(authMiddleware);
 router.get('/:name', async (req, res) => {
     const name = req.params.name;
 
+    if(name == null || name.length <= 3)
+        return res.status(400).send({error: 'Invalid name'})
+
     Coin.findOne({ name }, function (err, docs) {
         if (err) {
             console.log(err);
@@ -40,6 +43,7 @@ router.get('/admin', authRoleMiddleware, async (req, res) => {
 //Criação do obj Moeda
 router.post('/admin', authRoleMiddleware, async (req, res) => {
 
+    
     try {
         if (!req.files) {
             res.send({
@@ -49,10 +53,15 @@ router.post('/admin', authRoleMiddleware, async (req, res) => {
         } else {
 
             const { logo } = req.files
+            const name = req.body.name
+
+            if(name == null || name.length <= 3)
+                return res.status(400).send({error: 'Invalid name'})
+                
             const fileHash = crypto.randomBytes(10).toString('HEX');
             logo.mv(`${__dirname}/uploads/${fileHash}=${logo.name}`)
 
-            const coin = await Coin.create({ name: req.body.name, logo: `${fileHash}=${logo.name}` });
+            const coin = await Coin.create({ name, logo: `${fileHash}=${logo.name}` });
             console.log(coin)
             res.send({
                 status: true,

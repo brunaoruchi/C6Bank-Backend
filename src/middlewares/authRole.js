@@ -11,8 +11,12 @@ module.exports = async (req, res, next) => {
         }
     });
 
-    if(user.role !== 'admin') {
-        return res.status(401).send({ error: 'Not allowed' });
+    try {
+        if(user.role !== 'admin') {
+            return res.status(401).send({ error: 'Not allowed' });
+        }
+    } catch (error) {
+        console.log(error)
     }
 
     next()
