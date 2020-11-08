@@ -1,6 +1,6 @@
 <h1 align="center">Projeto Web: C6Bank</h1>
 <h1>
-   <img src="https://ik.imagekit.io/nfoyn1wc6g/apresentacao-f_wXExO9QwY.gif">
+   <img src="apresentacao-b.gif">
 </h1>
 
 ## Sobre
