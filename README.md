@@ -49,8 +49,6 @@ A aplicação web foi desenvolvida durante a disciplina - Programação Web, é 
 
 ## Como baixar o projeto 
 
-- Baixa e iniciar projeto [C6Bank-Frontend](https://github.com/brunoOGA/C6Bank-Frontend.git).
-
 ```bash
   
   # Clonar o repositório
@@ -66,3 +64,5 @@ A aplicação web foi desenvolvida durante a disciplina - Programação Web, é 
   $ yarn start
   
 ```
+
+- Baixar e iniciar projeto [C6Bank-Frontend](https://github.com/brunoOGA/C6Bank-Frontend.git).
